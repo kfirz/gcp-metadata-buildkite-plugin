@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "--- Discovering GCP metadata and exporting as environment variables"
+
+VARIABLES=$(curl -sSL -H "Metadata-Flavor: Google" http://metadata/computeMetadata/v1/project/attributes/)
+for VAR_NAME in ${VARIABLES}; do
+    ESCAPED_VAR_NAME=${VAR_NAME//-/_}
+    ESCAPED_VAR_NAME=${ESCAPED_VAR_NAME^^}
+    declare "${ESCAPED_VAR_NAME}=$(curl -sSL -H "Metadata-Flavor: Google" http://metadata/computeMetadata/v1/project/attributes/${VAR_NAME})"
+done

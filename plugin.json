@@ -1,0 +1,10 @@
+{
+  "name": "gcp-metadata",
+  "description": "Exports GCP metadata as environment variables",
+  "author": "@kfirz",
+  "public": true,
+  "requirements": [
+    "bash",
+    "curl"
+  ]
+}
